@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تبدیل تاریخ شمسی به میلادی</title>
+</head>
+<body>
+    <h1>تبدیل تاریخ شمسی به میلادی</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="persian_date">تاریخ شمسی (فرمت yyyy-mm-dd):</label>
+        <input type="text" id="persian_date" name="persian_date" required>
+        <button type="submit">تبدیل</button>
+    </form>
+
+    {% if converted_date %}
+        <h2>تاریخ میلادی معادل: {{ converted_date }}</h2>
+        <h2>تاریخ ورودی: {{ persian_date }}</h2>
+
+    {% endif %}
+</body>
+</html>

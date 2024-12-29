@@ -1,0 +1,15 @@
+<html lang="fa">
+<head>
+    <title>لیست کتاب‌ها</title>
+</head>
+<body>
+    <h1>کتاب‌ها</h1>
+    <ul>
+        {% for book in books %}
+            <li>{{ book.title }} - {{ book.writer.first_name }} {{ book.writer.last_name }}</li>
+        {% empty %}
+            <li>کتابی برای نمایش وجود ندارد.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

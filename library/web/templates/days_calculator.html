@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Days Calculator</title>
+    <style>
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Days Calculator</h1>
+    
+    <form method="get">
+        <label for="birth">Your birth date (YYYY-MM-DD):</label>
+        <input type="text" id="birth" name="birth">
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% elif days is not none %}
+        <p>You have lived <strong>{{ days }}</strong> days!</p>
+    {% endif %}
+</body>
+</html>

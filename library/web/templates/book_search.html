@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <form method="GET" action="">
+        <label for="book_name">نام کتاب را وارد کنید:</label>
+        <input type="text" name="book_name" required>
+        <br>
+        <label for="book_name">زمان چاپ را وارد کنید:</label>
+        <input type="time" name="printing_time" required>
+        <button type="submit">جستجو</button>
+    </form>
+
+    <p>{{ message }}</p>
+
+    <div>
+        {% for book in books %}
+            <p><strong>{{ book.title }}</strong></p>
+            <p>نویسنده: {{ book.writer }}</p>
+            <p>دسته بندی: {{ book.category }}</p>
+            <p>زمان چاپ: {{ book.printing_time }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
+

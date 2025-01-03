@@ -116,6 +116,31 @@ def search_book(request):
     return render(request, 'book_search.html', {'message': message, 'books': books})
 
 
+from .models import Book, Category, Writer
 
+def add_book(request):
+    message = ""
+    categories = Category.objects.all()
+    writers = Writer.objects.all()
 
-# ایجاد یک فرم در فرانت برای ایجاد یک کتاب از سمت فرانت
+    if 'title' in request.GET:
+        title = request.GET.get('title', "نامشخص")
+        category_id = request.GET.get('category')
+        writer_id = request.GET.get('writer')
+        number_of_pages = request.GET.get('number_of_pages')
+        cover_type = request.GET.get('cover_type')
+        printing_time = request.GET.get('printing_time')
+        avaliable = request.GET.get('avaliable') == 'on'
+
+        if title and category_id and writer_id and cover_type:
+            try:
+                category = Category.objects.get(id=category_id)
+                writer = Writer.objects.get(id=writer_id)
+
+                Book.objects.create(title=title,category=category,writer=writer,number_of_pages=number_of_pages,cover_type=cover_type,printing_time=printing_time,avaliable=avaliable)
+                message = "کتاب اضافه شد!"
+            except (Category.DoesNotExist, Writer.DoesNotExist):
+                message = "دسته‌بندی یا نویسنده نامعتبر است."
+        else:
+            message = "لطفاً تمام فیلدها را پر کنید."
+    return render(request, 'add_book.html', {'message': message, 'categories': categories, 'writers': writers})

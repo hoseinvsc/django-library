@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>اضافه کردن کتاب جدید</h1>
+    
+    {% if message %}
+        <p style="color: green;">{{ message }}</p>
+    {% endif %}
+    
+    <form method="get">
+        <label for="title">عنوان:</label><br>
+        <input type="text" id="title" name="title"><br><br>
+
+        <label for="category">دسته‌بندی:</label><br>
+        <select id="category" name="category" required>
+            <option value="" disabled selected>انتخاب کنید</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="writer">نویسنده:</label><br>
+        <select id="writer" name="writer" required>
+            <option value="" disabled selected>انتخاب کنید</option>
+            {% for writer in writers %}
+                <option value="{{ writer.id }}">{{ writer }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="number_of_pages">تعداد صفحات:</label><br>
+        <input type="number" id="number_of_pages" name="number_of_pages" min="1"><br><br>
+        <label for="cover_type">نوع جلد:</label><br>
+        <input type="text" id="cover_type" name="cover_type" required><br><br>
+
+        <label for="printing_time">ساعت چاپ:</label><br>
+        <input type="time" id="printing_time" name="printing_time"><br><br>
+
+        <label for="avaliable">موجود:</label><br>
+        <input type="checkbox" id="avaliable" name="avaliable"><br><br>
+
+        <button type="submit">اضافه کردن کتاب</button>
+    </form>
+</body>
+</html>

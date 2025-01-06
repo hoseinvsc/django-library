@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import test,web_test,css_test,home,book_list,checker,days_calculator,days_jcal,convert_date,add_book
+from .views import test,web_test,css_test,home,book_list,checker,days_calculator,days_jcal,convert_date,add_book,book_1,book_2,book_3
 # from . import views
 urlpatterns = [
     path('test/',test),
@@ -12,4 +12,7 @@ urlpatterns = [
     path('days_jcal/', days_jcal),
     path('convert/',convert_date),
     path('add-book/',add_book),
+    path('book/1/',book_1),
+    path('book/2/',book_2),
+    path('book/3/',book_3),
 ]

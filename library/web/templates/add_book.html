@@ -5,12 +5,12 @@
 </head>
 <body>
     <h1>اضافه کردن کتاب جدید</h1>
-    
-    {% if message %}
+        {% if message %}
         <p style="color: green;">{{ message }}</p>
     {% endif %}
     
-    <form method="get">
+    <form method="post">
+        {% csrf_token %}
         <label for="title">عنوان:</label><br>
         <input type="text" id="title" name="title"><br><br>
 

@@ -2,9 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from datetime import date, datetime
 import jdatetime
-
-
-from .models import Book
+from .models import Book, Category, Writer
 
 def test(request):
     return HttpResponse("hello world!")
@@ -38,8 +36,6 @@ def checker(request):
     return render(request, 'checker.html',{'message': message})
 
 
-
-
 def days_calculator(request):
     input = request.GET.get('birth')
     if input :
@@ -60,7 +56,6 @@ def days_calculator(request):
     return render(request, 'days_calculator.html')
 
 
-
 def days_jcal(request):
     input_date = request.GET.get('birth')
     if input_date:
@@ -79,7 +74,6 @@ def days_jcal(request):
     return render(request, 'days_jcal.html')
 
 
-
 def convert_date(request):
     if request.method == 'POST':
         input = request.POST.get('persian_date')
@@ -93,10 +87,6 @@ def convert_date(request):
                 return render(request, 'convert_date.html', {'message': message})
     return render(request, 'convert_date.html')
 
-
-
-
-from .models import Book
 
 def search_book(request):
     books = None
@@ -116,31 +106,69 @@ def search_book(request):
     return render(request, 'book_search.html', {'message': message, 'books': books})
 
 
-from .models import Book, Category, Writer
+# def add_book(request):
+#     message = ""
+#     categories = Category.objects.all()
+#     writers = Writer.objects.all()
+
+#     if 'title' in request.GET:
+#         title = request.GET.get('title', "نامشخص")
+#         category_id = request.GET.get('category')
+#         writer_id = request.GET.get('writer')
+#         number_of_pages = request.GET.get('number_of_pages')
+#         cover_type = request.GET.get('cover_type')
+#         printing_time = request.GET.get('printing_time')
+#         avaliable = request.GET.get('avaliable') == 'on'
+
+#         if title and category_id and writer_id and cover_type:
+#             try:
+#                 category = Category.objects.get(id=category_id)
+#                 writer = Writer.objects.get(id=writer_id)
+
+#                 Book.objects.create(title=title,category=category,writer=writer,number_of_pages=number_of_pages,cover_type=cover_type,printing_time=printing_time,avaliable=avaliable)
+#                 message = "کتاب اضافه شد!"
+#             except (Category.DoesNotExist, Writer.DoesNotExist):
+#                 message = "دسته‌بندی یا نویسنده نامعتبر است."
+#         else:
+#             message = "لطفاً تمام فیلدها را پر کنید."
+#     return render(request, 'add_book.html', {'message': message, 'categories': categories, 'writers': writers})
+
 
 def add_book(request):
-    message = ""
-    categories = Category.objects.all()
-    writers = Writer.objects.all()
+    message = "" 
+    categories = Category.objects.all() 
+    writers = Writer.objects.all()  
 
-    if 'title' in request.GET:
-        title = request.GET.get('title', "نامشخص")
-        category_id = request.GET.get('category')
-        writer_id = request.GET.get('writer')
-        number_of_pages = request.GET.get('number_of_pages')
-        cover_type = request.GET.get('cover_type')
-        printing_time = request.GET.get('printing_time')
-        avaliable = request.GET.get('avaliable') == 'on'
+    if request.method == 'POST':
+        title = request.POST.get('title', "نامشخص")
+        category_id = request.POST.get('category')
+        writer_id = request.POST.get('writer')
+        number_of_pages = request.POST.get('number_of_pages')
+        cover_type = request.POST.get('cover_type')
+        printing_time = request.POST.get('printing_time')
+        avaliable = request.POST.get('avaliable') == 'on' 
 
         if title and category_id and writer_id and cover_type:
             try:
                 category = Category.objects.get(id=category_id)
                 writer = Writer.objects.get(id=writer_id)
-
                 Book.objects.create(title=title,category=category,writer=writer,number_of_pages=number_of_pages,cover_type=cover_type,printing_time=printing_time,avaliable=avaliable)
-                message = "کتاب اضافه شد!"
+                message = "کتاب با موفقیت اضافه شد!"
             except (Category.DoesNotExist, Writer.DoesNotExist):
                 message = "دسته‌بندی یا نویسنده نامعتبر است."
         else:
             message = "لطفاً تمام فیلدها را پر کنید."
     return render(request, 'add_book.html', {'message': message, 'categories': categories, 'writers': writers})
+
+
+def book_1(request):
+    book = Book.objects.get(id=1)
+    return render(request, 'book_detail.html', {'book': book})
+
+def book_2(request):
+    book = Book.objects.get(id=2)
+    return render(request, 'book_detail.html', {'book': book})
+
+def book_3(request):
+    book = Book.objects.get(id=3)
+    return render(request, 'book_detail.html', {'book': book})

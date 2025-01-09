@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>ویرایش کتاب: {{ object.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_title">عنوان:</label>
+        {{ form.title }}
+        <br><br>
+        <label for="id_category">دسته‌بندی:</label>
+        {{ form.category }}
+        <br><br>
+        <label for="id_writer">نویسنده:</label>
+        {{ form.writer }}
+        <br><br>
+        <label for="id_number_of_pages">تعداد صفحات:</label>
+        {{ form.number_of_pages }}
+        <br><br>
+        <label for="id_cover_type">نوع جلد:</label>
+        {{ form.cover_type }}
+        <br><br>
+        <label for="id_printing_time">زمان چاپ:</label>
+        {{ form.printing_time }}
+        <br><br>
+        <label for="id_avaliable">موجود:</label>
+        {{ form.avaliable }}
+        <button type="submit">ذخیره</button>
+    </form>
+</body>
+</html>

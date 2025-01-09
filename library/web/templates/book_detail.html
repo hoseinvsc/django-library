@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Detail</title>
 </head>
 <body>
-    <h1>مشخصات کتاب</h1>
-    <p><strong>عنوان:</strong> {{ book.title }}</p>
-    <p><strong>دسته بندی:</strong> {{ book.category.name }}</p>
-    <p><strong>نویسنده:</strong> {{ book.writer.first_name }} {{ book.writer.last_name }}</p>
-    <p><strong>تعداد صفحات:</strong> {{ book.number_of_pages }}</p>
-    <p><strong>نوع جلد:</strong> {{ book.cover_type }}</p>
-    <p><strong>زمان چاپ:</strong> {{ book.printing_time }}</p>
-    <p><strong>موجود در کتابخانه:</strong> {% if book.avaliable %}بله{% else %}خیر{% endif %}</p>
+    <h1>{{ book.title }}</h1>
+    <p>دسته بندی: {{ book.category }}</p>
+    <p>نویسنده: {{ book.writer }}</p>
+    <p>تعداد صفحات: {{ book.number_of_pages }}</p>
+    <p>نوع جلد: {{ book.cover_type }}</p>
+    <p>زمان چاپ: {{ book.printing_time }}</p>
+    <p>موجود: {{ book.avaliable }}</p>
 </body>
 </html>

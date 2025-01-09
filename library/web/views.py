@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from datetime import date, datetime
+from django.urls import reverse_lazy
 import jdatetime
 from .models import Book, Category, Writer
 
@@ -160,15 +161,27 @@ def add_book(request):
             message = "لطفاً تمام فیلدها را پر کنید."
     return render(request, 'add_book.html', {'message': message, 'categories': categories, 'writers': writers})
 
+# def book_detail(request, book_id):
+#     try:
+#         book = Book.objects.get(id=book_id)
+#     except:
+#         book = None
+#     return render(request, 'book_detail.html', {'book': book})
 
-def book_1(request):
-    book = Book.objects.get(id=1)
-    return render(request, 'book_detail.html', {'book': book})
 
-def book_2(request):
-    book = Book.objects.get(id=2)
-    return render(request, 'book_detail.html', {'book': book})
+from django.views.generic import DetailView
 
-def book_3(request):
-    book = Book.objects.get(id=3)
-    return render(request, 'book_detail.html', {'book': book})
+class BookDetailView(DetailView):
+    model = Book
+    template_name ='book_detail.html'
+    context_object_name ='book'
+
+
+
+from django.views.generic import UpdateView
+
+class BookUpdateView(UpdateView):
+    model = Book
+    fields = ['title', 'category', 'writer','number_of_pages','cover_type','printing_time','avaliable']
+    template_name = 'book_update.html'
+    success_url = reverse_lazy('book_list')
